@@ -41,7 +41,7 @@ export function NotificationSettings() {
             className="w-full rounded-md border border-gray-300 p-2"
             defaultValue="1800000"
           >
-            <option value="900000">Every 15 minutes</option>
+            <option value="6000">Every 1 minutes</option>
             <option value="1800000">Every 30 minutes</option>
             <option value="3600000">Every hour</option>
           </select>
