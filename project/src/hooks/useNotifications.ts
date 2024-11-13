@@ -49,8 +49,8 @@ export const useNotifications = ({ enabled, interval, sound }: NotificationOptio
 
   useEffect(() => {
     // Initialize audio
-    audioRef.current = new Audio('/notification.mp3');
-    audioRef.current.volume = 0.5;
+    audioRef.current = new Audio('/public/sounds/water-drop.mp3');
+    audioRef.current.volume = 0.8;
 
     return () => {
       if (audioRef.current) {
