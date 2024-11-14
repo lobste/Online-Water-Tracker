@@ -34,7 +34,7 @@ export const useNotifications = ({ enabled, interval, sound }: NotificationOptio
       body: 'Remember to drink water and stay healthy!',
       icon: '/water-drop.png',
       badge: '/water-drop.png',
-      silent: !sound
+      silent: true
     });
 
     if (sound) {
@@ -49,7 +49,7 @@ export const useNotifications = ({ enabled, interval, sound }: NotificationOptio
 
   useEffect(() => {
     // Initialize audio
-    audioRef.current = new Audio('/public/sounds/water-drop.mp3');
+    audioRef.current = new Audio('/sounds/water-drop.mp3');
     audioRef.current.volume = 0.8;
 
     return () => {
