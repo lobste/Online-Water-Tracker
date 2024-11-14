@@ -5,8 +5,10 @@ import { Settings as SettingsPanel } from './components/Settings';
 import { Stats } from './components/Stats';
 import { NotificationSettings } from './components/NotificationSettings';
 import { useNotifications } from './hooks/useNotifications';
+import { Helmet } from 'react-helmet'; // Helmet'ı import et
 
 function App() {
+
   const [waterAmount, setWaterAmount] = useState(0);
   const [dailyGoal, setDailyGoal] = useState(2000);
   const [cupSize, setCupSize] = useState(200);
@@ -23,6 +25,20 @@ function App() {
     interval: notificationInterval,
     sound: notificationSound,
   });
+
+  return (
+    <div>
+      {/* Helmet burada kullanılır */}
+      <Helmet>
+        <title>WaterTrack - Track Your Daily Water Intake</title>
+        <meta name="description" content="Easily track your daily water intake and stay hydrated with our online water tracker. Set hydration goals and monitor your progress with WaterTrack." />
+        <meta name="keywords" content="water tracker, hydration tracker, daily water intake, stay hydrated" />
+      </Helmet>
+
+      <h1>Track Your Daily Water Intake</h1>
+    </div>
+  );
+}
 
   const progress = (waterAmount / dailyGoal) * 100;
   const remainingMl = dailyGoal - waterAmount;
