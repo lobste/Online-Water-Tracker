@@ -25,7 +25,6 @@ function App() {
     interval: notificationInterval,
     sound: notificationSound,
   });
-}
 
   const progress = (waterAmount / dailyGoal) * 100;
   const remainingMl = dailyGoal - waterAmount;
