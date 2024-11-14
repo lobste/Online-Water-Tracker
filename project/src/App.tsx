@@ -26,6 +26,19 @@ function App() {
     sound: notificationSound,
   });
 
+  return (
+    <div>
+      {/* Helmet burada kullanılır */}
+      <Helmet>
+        <title>WaterTrack - Track Your Daily Water Intake</title>
+        <meta name="description" content="Easily track your daily water intake and stay hydrated with our online water tracker. Set hydration goals and monitor your progress with WaterTrack." />
+        <meta name="keywords" content="water tracker, hydration tracker, daily water intake, stay hydrated" />
+      </Helmet>
+
+      <h1>Track Your Daily Water Intake</h1>
+      </div>
+  );
+
   const progress = (waterAmount / dailyGoal) * 100;
   const remainingMl = dailyGoal - waterAmount;
   const remainingCups = Math.ceil(remainingMl / cupSize);
