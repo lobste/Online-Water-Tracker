@@ -12,7 +12,7 @@ import { About } from './pages/About';
 import { HowToUse } from './pages/HowToUse';
 import { Benefits } from './pages/Benefits';
 
-function App() {
+function WaterTracker() {
 
   const [waterAmount, setWaterAmount] = useState(0);
   const [dailyGoal, setDailyGoal] = useState(2000);
@@ -170,7 +170,7 @@ function App() {
   );
 }
 
-function Footer() {
+function App() {
   return (
     <Router>
       <Routes>
