@@ -169,17 +169,6 @@ function App() {
   );
 }
 
-function Footer() {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<WaterTracker />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/how-to-use" element={<HowToUse />} />
-        <Route path="/benefits-of-water" element={<Benefits />} />
-      </Routes>
-    </Router>
-  );
-}
+
 
 export default App;
