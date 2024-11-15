@@ -6,6 +6,11 @@ import { Stats } from './components/Stats';
 import { NotificationSettings } from './components/NotificationSettings';
 import { useNotifications } from './hooks/useNotifications';
 import { Helmet } from 'react-helmet'; // Helmet'ı import et
+import { Footer } from './components/Footer';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { About } from './pages/About';
+import { HowToUse } from './pages/HowToUse';
+import { Benefits } from './pages/Benefits';
 
 function App() {
 
@@ -161,6 +166,19 @@ function App() {
         )}
       </div>
     </div>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<WaterTracker />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/how-to-use" element={<HowToUse />} />
+        <Route path="/benefits-of-water" element={<Benefits />} />
+      </Routes>
+    </Router>
   );
 }
 
