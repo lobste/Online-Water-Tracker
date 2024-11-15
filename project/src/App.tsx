@@ -165,7 +165,7 @@ function WaterTracker() {
           </div>
         )}
       </div>
-      <Footer />
+      <Footer className="mt-8" />
     </div>
   );
 }
