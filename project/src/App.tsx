@@ -12,7 +12,7 @@ import { About } from './pages/About';
 import { HowToUse } from './pages/HowToUse';
 import { Benefits } from './pages/Benefits';
 
-function App() {
+function WaterTracker() {
 
   const [waterAmount, setWaterAmount] = useState(0);
   const [dailyGoal, setDailyGoal] = useState(2000);
@@ -165,10 +165,23 @@ function App() {
           </div>
         )}
       </div>
+      <Footer />
     </div>
   );
 }
 
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<WaterTracker />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/how-to-use" element={<HowToUse />} />
+        <Route path="/benefits-of-water" element={<Benefits />} />
+      </Routes>
+    </Router>
+  );
+}
 
 
 export default App;
