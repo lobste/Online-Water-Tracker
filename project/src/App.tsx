@@ -135,6 +135,7 @@ function WaterTracker() {
           <button
             onClick={removeWater}
             className="p-3 rounded-full bg-red-100 text-red-600 hover:bg-red-200 transition-colors"
+            aria-label="Decrease water amount"
             disabled={waterAmount === 0}
           >
             <Minus className="h-6 w-6" />
@@ -142,6 +143,7 @@ function WaterTracker() {
           <button
             onClick={addWater}
             className="p-3 rounded-full bg-blue-100 text-blue-600 hover:bg-blue-200 transition-colors"
+            aria-label="Increase water amount"
             disabled={waterAmount >= dailyGoal}
           >
             <Plus className="h-6 w-6" />
