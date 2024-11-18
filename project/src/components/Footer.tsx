@@ -81,13 +81,13 @@ export const Footer: React.FC = () => {
             href="mailto:watertrackeronline@gmail.com"
             className="text-blue-600 hover:text-blue-800 text-sm"
           >
-            info@watertracker.online
+            watertrackeronline@gmail.com
           </a>
         </div>
       </div>
 
       <div className="mt-4 pt-2 border-t text-center text-xs text-gray-500">
-        <p>&copy; {new Date().getFullYear()} WaterTracker.online - All rights reserved.</p>
+        <p>&copy; {new Date().getFullYear()} watertracker.online - All rights reserved.</p>
       </div>
     </footer>
   );
