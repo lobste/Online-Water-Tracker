@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Footer } from '../components/Footer';
-import { HelpCircle, ArrowLeft, Plus, Minus, Bell, Settings } from 'lucide-react';
+import { HelpCircle, ArrowLeft, Plus, Minus, Bell, Settings, Calculator } from 'lucide-react';
 
 export const HowToUse: React.FC = () => {
   return (
@@ -21,6 +21,25 @@ export const HowToUse: React.FC = () => {
           <h2 className="text-xl font-semibold text-blue-700 mb-4">Core Features</h2>
           
           <div className="space-y-6">
+            <div className="flex items-start gap-4">
+              <div className="p-3 bg-blue-100 rounded-lg">
+                <Calculator className="h-5 w-5 text-blue-600" />
+              </div>
+              <div>
+                <h3 className="font-medium text-gray-800 mb-1">Water Intake Calculator</h3>
+                <p className="text-gray-600">
+                  Use our calculator to determine your recommended daily water intake based on your weight. 
+                  Enter your weight in kg or lbs, and we'll calculate the optimal amount for you.
+                </p>
+                <ul className="list-disc list-inside text-gray-600 mt-2 space-y-1">
+                  <li>Access the calculator in Settings</li>
+                  <li>Enter your weight</li>
+                  <li>Choose your preferred unit (kg/lbs)</li>
+                  <li>Click calculate to update your daily goal</li>
+                </ul>
+              </div>
+            </div>
+
             <div className="flex items-start gap-4">
               <div className="p-3 bg-blue-100 rounded-lg">
                 <Plus className="h-5 w-5 text-blue-600" />
@@ -52,7 +71,7 @@ export const HowToUse: React.FC = () => {
               <div>
                 <h3 className="font-medium text-gray-800 mb-1">Settings</h3>
                 <p className="text-gray-600">
-                  Customize your daily goal and cup size to match your needs.
+                  Customize your daily goal, cup size, and calculate your recommended intake based on your weight.
                 </p>
               </div>
             </div>
@@ -71,12 +90,14 @@ export const HowToUse: React.FC = () => {
           </div>
 
           <div className="mt-8">
-            <h2 className="text-xl font-semibold text-blue-700 mb-4">Tips</h2>
+            <h2 className="text-xl font-semibold text-blue-700 mb-4">Tips for Success</h2>
             <ul className="list-disc list-inside text-gray-600 space-y-2">
-              <li>Keep your daily goal realistic</li>
+              <li>Use the calculator to set a personalized daily goal</li>
+              <li>Keep your daily goal realistic and achievable</li>
               <li>Drink water at regular intervals</li>
               <li>Track your progress daily</li>
               <li>Keep notifications enabled</li>
+              <li>Adjust your goal based on activity level and climate</li>
             </ul>
           </div>
 
