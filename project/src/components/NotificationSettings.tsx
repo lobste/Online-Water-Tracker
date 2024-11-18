@@ -18,27 +18,55 @@ export const NotificationSettings: React.FC<NotificationSettingsProps> = ({
   sound,
   setSound,
 }) => {
-  const [permission, setPermission] = React.useState(Notification.permission);
+  const [permission, setPermission] = React.useState<NotificationPermission>('default');
+  const [isSupported, setIsSupported] = React.useState(true);
 
   React.useEffect(() => {
+    // Check if notifications are supported
+    if (!('Notification' in window)) {
+      setIsSupported(false);
+      return;
+    }
+
     const checkPermission = () => {
       setPermission(Notification.permission);
     };
 
     checkPermission();
     if (enabled && permission === 'default') {
-      Notification.requestPermission().then(checkPermission);
+      Notification.requestPermission().then(checkPermission).catch(console.error);
     }
-  }, [enabled]);
+  }, [enabled, permission]);
+
+  if (!isSupported) {
+    return (
+      <div className="p-4 bg-yellow-50 rounded-lg">
+        <div className="flex items-center gap-2">
+          <AlertTriangle className="h-5 w-5 text-yellow-600" />
+          <p className="text-sm text-yellow-800">
+            Notifications are not supported in your browser.
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-4">
       {permission === 'denied' && (
-        <div className="flex items-center gap-2 p-3 bg-yellow-50 text-yellow-800 rounded-lg mb-4">
+        <div className="flex items-center gap-2 p-4 bg-yellow-50 text-yellow-800 rounded-lg">
           <AlertTriangle className="h-5 w-5 text-yellow-600" />
-          <p className="text-sm">
-            Please enable notifications in your browser settings to receive reminders.
-          </p>
+          <div className="text-sm space-y-1">
+            <p>Notifications are blocked in your browser settings.</p>
+            <p className="text-xs">
+              To enable notifications:
+              {navigator.platform.includes('Mac') ? (
+                <span> Open Safari Preferences → Websites → Notifications, or System Settings → Notifications → Safari</span>
+              ) : (
+                <span> Click the lock icon in your address bar and enable notifications</span>
+              )}
+            </p>
+          </div>
         </div>
       )}
 
