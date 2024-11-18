@@ -19,8 +19,9 @@ export const About: React.FC = () => {
 
         <div className="prose max-w-none">
           <p className="text-gray-600 mb-4">
-            WaterTracker.online is a free web application designed to help you track your daily water intake. 
-            We understand the importance of adequate water consumption for a healthy lifestyle and want to help you maintain it.
+           WaterTracker.online is a free web application designed to help you track your daily water intake. 
+           We understand the importance of adequate water consumption for a healthy lifestyle and want to help you maintain it. 
+           This app is especially helpful for individuals who spend long hours at their desks and often forget to drink water.
           </p>
 
           <h2 className="text-xl font-semibold text-blue-700 mt-6 mb-4">Our Mission</h2>
