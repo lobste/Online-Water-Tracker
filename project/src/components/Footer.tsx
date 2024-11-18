@@ -78,7 +78,7 @@ export const Footer: React.FC = () => {
             Questions about hydration?
           </p>
           <a
-            href="mailto:info@watertracker.online"
+            href="mailto:watertrackeronline@gmail.com"
             className="text-blue-600 hover:text-blue-800 text-sm"
           >
             info@watertracker.online
