@@ -1,4 +1,5 @@
 import React from 'react';
+import { WaterCalculator } from './WaterCalculator';
 
 interface SettingsProps {
   dailyGoal: number;
@@ -15,9 +16,12 @@ export const Settings: React.FC<SettingsProps> = ({
   setCupSize,
   onClose,
 }) => {
+  
   return (
     <div className="mb-8 p-6 bg-blue-50 rounded-xl">
       <h2 className="text-xl font-semibold text-blue-800 mb-4">Settings</h2>
+
+       <WaterCalculator onCalculate={setDailyGoal} />
       
       <div className="space-y-4">
         <div>
