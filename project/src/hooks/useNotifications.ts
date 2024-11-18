@@ -9,87 +9,56 @@ interface NotificationOptions {
 export const useNotifications = ({ enabled, interval, sound }: NotificationOptions) => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const notificationActiveRef = useRef<boolean>(false); // Bildirimin aktif olup olmadığını izleyin
 
   const playNotificationSound = useCallback(() => {
     if (sound && audioRef.current) {
-      audioRef.current.play().catch((error) => {
-        console.warn('Failed to play notification sound:', error);
+      audioRef.current.play().catch(() => {
+        console.warn('Failed to play notification sound');
       });
     }
   }, [sound]);
 
   const showNotification = useCallback(() => {
-    if (!enabled) return;
+    if (!enabled || notificationActiveRef.current) return;
+
+    notificationActiveRef.current = true; // Bildirimin aktif olduğunu işaretle
 
     const messages = [
       'Time to hydrate! 💧',
       'Water break! 🌊',
       'Stay healthy, drink water! 💪',
-      'Hydration reminder! 🚰'
+      'Hydration reminder! 🚰',
     ];
-
     const randomMessage = messages[Math.floor(Math.random() * messages.length)];
 
-    // Check if the Notification API is supported
-    if (!('Notification' in window)) {
-      console.warn('This browser does not support notifications');
-      return;
-    }
-
-    // Handle MacOS specific behavior
-    const isMacOS = /Mac|iPhone|iPad|iPod/.test(navigator.platform);
-    const createNotification = () => {
-      try {
-        const notification = new Notification(randomMessage, {
-          body: 'Remember to drink water and stay healthy!',
-          icon: '/water-drop.png',
-          badge: '/water-drop.png',
-          // MacOS works better with requireInteraction set to true
-          requireInteraction: isMacOS,
-          silent: !sound
-        });
-
-        if (sound) {
-          playNotificationSound();
-        }
-
-        notification.onclick = () => {
-          window.focus();
-          notification.close();
-        };
-
-        // Auto-close notification after 5 seconds on MacOS
-        if (isMacOS) {
-          setTimeout(() => notification.close(), 5000);
-        }
-      } catch (error) {
-        console.error('Error creating notification:', error);
-      }
-    };
-
-    // Handle permission states
-    if (Notification.permission === 'granted') {
-      createNotification();
-    } else if (Notification.permission !== 'denied') {
-      // Request permission and show notification if granted
-      Notification.requestPermission().then(permission => {
-        if (permission === 'granted') {
-          createNotification();
-        }
-      }).catch(error => {
-        console.error('Error requesting notification permission:', error);
+    if ('Notification' in window && Notification.permission === 'granted') {
+      const notification = new Notification(randomMessage, {
+        body: 'Remember to drink water and stay healthy!',
+        icon: '/water-drop.png',
+        badge: '/water-drop.png',
+        silent: !sound,
       });
+
+      if (sound) playNotificationSound();
+
+      notification.onclick = () => {
+        window.focus();
+        notification.close();
+      };
+
+      // Bildirimin bitişini takip et
+      notification.onclose = () => {
+        notificationActiveRef.current = false; // Bildirimi pasif hale getir
+      };
+    } else {
+      notificationActiveRef.current = false; // Bildirim desteklenmiyorsa pasif yap
     }
   }, [enabled, sound, playNotificationSound]);
 
   useEffect(() => {
-    // Initialize audio with error handling
-    try {
-      audioRef.current = new Audio('/notification.mp3');
-      audioRef.current.volume = 0.5;
-    } catch (error) {
-      console.warn('Failed to initialize audio:', error);
-    }
+    audioRef.current = new Audio('/notification.mp3');
+    audioRef.current.volume = 0.5;
 
     return () => {
       if (audioRef.current) {
@@ -99,32 +68,23 @@ export const useNotifications = ({ enabled, interval, sound }: NotificationOptio
   }, []);
 
   useEffect(() => {
-    if (timerRef.current) {
-      clearInterval(timerRef.current);
-    }
+    if (timerRef.current) clearInterval(timerRef.current);
 
     if (enabled) {
-      // Initial notification after a short delay
-      const initialTimeout = setTimeout(showNotification, 1000);
+      if ('Notification' in window && Notification.permission === 'default') {
+        Notification.requestPermission();
+      }
 
-      // Set up recurring notifications
-      timerRef.current = setInterval(showNotification, interval * 60 * 1000);
-
-      return () => {
-        clearTimeout(initialTimeout);
-        if (timerRef.current) {
-          clearInterval(timerRef.current);
-        }
-      };
+      timerRef.current = setInterval(() => {
+        notificationActiveRef.current = false; // Yeni bildirimden önce durumu sıfırla
+        showNotification();
+      }, interval * 60 * 1000);
     }
+
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
   }, [enabled, interval, showNotification]);
 
-  // Request permission when enabled changes to true
-  useEffect(() => {
-    if (enabled && ('Notification' in window)) {
-      Notification.requestPermission().catch(error => {
-        console.error('Error requesting notification permission:', error);
-      });
-    }
-  }, [enabled]);
+  return null;
 };
