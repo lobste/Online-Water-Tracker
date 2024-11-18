@@ -81,7 +81,7 @@ export const Footer: React.FC = () => {
             href="mailto:watertrackeronline@gmail.com"
             className="text-blue-600 hover:text-blue-800 text-sm"
           >
-            watertrackeronline@gmail.com
+            watertrackeronline
           </a>
         </div>
       </div>
