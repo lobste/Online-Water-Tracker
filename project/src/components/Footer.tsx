@@ -4,7 +4,7 @@ import { Info, HelpCircle, Heart, ExternalLink } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-white shadow-lg rounded-lg max-w-3xl mx-auto mt-20 p-4">
+    <footer className="bg-white shadow-lg rounded-lg max-w-3xl mx-auto mt-24 p-4">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
         {/* Internal Links */}
         <div>
